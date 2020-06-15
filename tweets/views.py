@@ -74,7 +74,7 @@ def tweet_action_view(request, tweet_id,*args, **kwargs):
             obj.likes.add(request.user)
         elif action == "unlike":
             obj.likes.remove(request.user)
-        elif aciton == 'retweet':
+        elif action == 'retweet':
             # this is todo
             pass
     return Response({"message": action }, status=200)
