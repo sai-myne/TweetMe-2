@@ -5,6 +5,8 @@
             -> Image -> Media Storage Server
         -> Delete
         -> Retweeting
+            -> Reda only serializer
+            -> Create only serializer
         -> Liking
 
 2. Users
