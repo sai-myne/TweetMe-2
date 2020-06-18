@@ -16,35 +16,37 @@ function getCookie(name) {
 
 function lookup(method, endpoint, callback, data) {
   let jsonData;
-  if (data) {
-    jsonData = JSON.stringify(data);
+  if (data){
+    jsonData = JSON.stringify(data)
   }
-  const xhr = new XMLHttpRequest(); // xhr = someClass()
-  const url = `http://localhost:8000/api${endpoint}`;
-  xhr.responseType = "json";
-  const csrftoken = getCookie("csrftoken");
-  xhr.open(method, url);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  
+  const xhr = new XMLHttpRequest()
+  const url = `http://localhost:8000/api${endpoint}`
+  xhr.responseType = "json"
+  const csrftoken = getCookie('csrftoken');
+  xhr.open(method, url)
+  xhr.setRequestHeader("Content-Type", "application/json")
+  //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
   if (csrftoken){
-    xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest");
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-  }  
-  xhr.onload = function () {
-    callback(xhr.response, xhr.status);
-  };
+    
+    
+    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+  }
+  
+  xhr.onload = function() {
+    callback(xhr.response, xhr.status)
+  }
   xhr.onerror = function (e) {
-    console.log(e);
-    callback({ message: "The request was an error" }, 400);
-  };
-  xhr.send(jsonData);
+    console.log(e)
+    callback({"message": "The request was an error"}, 400)
+  }
+  xhr.send(jsonData)
 }
 
 export function createTweet(newTweet, callback){
-  lookup("POST", '/tweets/create/', callback, {content: newTweet})
+  lookup("POST", "/tweets/create/", callback, {content: newTweet})
 }
 
-export const loadTweets = function (callback) {
-  lookup("GET", "/tweets/", callback)  
-};
+export function loadTweets(callback) {
+    lookup("GET", "/tweets/", callback)
+}
