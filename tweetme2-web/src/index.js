@@ -25,7 +25,7 @@ if(tweetsEl){
 }
 
 const tweetDetailElements  = document.querySelectorAll(".tweetme-2-detail")
-tweetDetailElements .forEach(container => {
+tweetDetailElements.forEach(container => {
   ReactDOM.render(
     e(TweetDetailComponent , container.dataset),
     container  
