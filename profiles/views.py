@@ -3,10 +3,9 @@ from django.shortcuts import render
 
 from .models import Profile
 
-# Create your views here.
 def profile_detail_view(request, username, *args, **kwargs):
-    #get the profile data
-    qs = Profile.objects.filter(user__username = username)
+    # get the profile for the passed username
+    qs = Profile.objects.filter(user__username=username)
     if not qs.exists():
         raise Http404
     profile_obj = qs.first()
