@@ -30,7 +30,7 @@ class PublicProfileSerializer(serializers.ModelSerializer):
         if request:
             user = request.user
             is_following = user in obj.followers.all()
-        return False
+        return is_following
     
     def get_first_name(self, obj):
         return obj.user.first_name
